@@ -5,20 +5,42 @@ import json
 import numpy as np
 import re
 
+"""
+Student name(s): Cesar Arturo Alba Moreno
+Student ID(s): 21251994
+Git repository: https://github.com/cesar-arturo/arc
+
+"""
+
 ### YOUR CODE HERE: write at least three functions which solve
 ### specific tasks by transforming the input x and returning the
 ### result. Name them according to the task ID as in the three
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
-def solve_6a1e5592(x):
-    return x
 
-def solve_b2862040(x):
-    return x
 
-def solve_05269061(x):
+def solve_b94a9452(x):
+    """
+    Description:
+        The expected input for this task is a grid with squares of different color.There is an inner and outer square
+        (one inside the other) and the orign is the same for both.
+        The transformation removes the empty cells and keeps only the part of the grid that contains the squares. 
+        Once the grid is "trimmed" the color of the squares is switched. 
+    
+    """
+    # Trim the grid horizontally.Remove all rows that contains only 0.
+    # np.all function will find what columns(depending on the given axis) contains only 0(given condition) and will
+    # exclude them from the new grid
+    x = x[~np.all(x == 0, axis=1)]
+    #Trim the grid vertically.Remove all columns that contains only 0
+    x = x[:,~np.all(x == 0, axis=0)]
+    
+    # Get the different colors of the grid
+    colors= np.unique(x)
+    # Switch colors using the np.where functions to do a simple replacement.
+    # In this case the np.where works as a ternary operator switching the current value during the iteration
+    x=np.where(x == colors[0], colors[1], colors[0])
     return x
-
 
 def main():
     # Find all the functions defined in this file whose names are
