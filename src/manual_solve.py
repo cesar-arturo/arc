@@ -118,6 +118,54 @@ def solve_6e19193c(x):
                     col_index+=1
     return x
 
+
+def solve_bdad9b1f(x):
+    """
+    Description:
+        The expected input for this task is a grid with 2 rectangles(size 2). One rectangle has a vertical direction and
+        the other rectangle is horizontal. Both rectangles has different colors. If the size length of the rectangles is 
+        increased until they reach the oposite side of the grid, they will intersect at one point.
+
+    
+        The transformation is a copy of the original grid(same size and same 2 rectangles) and project the rectangles
+        until the oposite side of the grid. Find the x,y pair where the rectangles are intersected and change the color of
+        this point.
+        The color of the intersection is fixed(yellow), same as 2 rectangles.
+        The origin of the rectangles is always a border of the grid
+    """
+     # Get the general information of the grid : size and color of the rectangles
+    # Store the size of the grid in two variables w(width) and h(height)
+    h, w = x.shape
+    # Get the different colors of the grid removing the blank color(0) to get the color of the shapes
+    color= np.delete(np.unique(x), 0)
+    
+    #During the iteration the program will find the row and colum that contains the rectangle and the color
+    rec_h=0 
+    color_h=0 
+    rec_v=0 
+    color_v=0
+    color_intersect=4
+    
+    for j in range(w):
+        for i in range(h):
+            #Finds 2 consecutive filled cell in the x axis.There is an L shape
+            if x[i][j] in color and j+1 < w and x[i][j+1] == x[i][j]:
+                rec_h=i
+                color_h=x[i][j]
+            if x[i][j] in color and i+1 < h and x[i+1][j]== x[i][j]:
+                rec_v=j
+                color_v=x[i][j]
+    #Replace the entire row and column that contains the rectangle with the given color
+    x[rec_h,0:]=color_h
+    x[:,rec_v]=color_v
+    #Replace the color of the intersection with a fixed value. 
+    x[rec_h,rec_v]=color_intersect
+    
+    
+    return x
+        
+    
+
 def main():
     # Find all the functions defined in this file whose names are
     # like solve_abcd1234(), and run them.
