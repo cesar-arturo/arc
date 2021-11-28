@@ -40,6 +40,7 @@ def solve_b94a9452(x):
     # Switch colors using the np.where functions to do a simple replacement.
     # In this case the np.where works as a ternary operator switching the current value during the iteration
     x=np.where(x == colors[0], colors[1], colors[0])
+    # This function solves all the inputs of the training dataset (for this task)
     return x
 
 def solve_6e19193c(x):
@@ -116,6 +117,7 @@ def solve_6e19193c(x):
                 if(col_index <= w-1):
                     x[i][col_index]=color
                     col_index+=1
+    # This function solves all the inputs of the training dataset (for this task)
     return x
 
 
@@ -161,8 +163,29 @@ def solve_bdad9b1f(x):
     #Replace the color of the intersection with a fixed value. 
     x[rec_h,rec_v]=color_intersect
     
-    
+    # This function solves all the inputs of the training dataset (for this task)
     return x
+
+    """
+    Summary
+    
+    The scope of this class is to implement the solution of these task independently, in other words, there is no code 
+    shared between the solve methods.For a bigger scale project that solves all the task or a high percentage of them 
+    another approach could be needed. There are subtasks that could be used in more than one tasks, for example: identify
+    shapes (rectangles,squares,lines,etc), remove blanks, rotations, switch colors,etc. If those subtasks are written in
+    a different package(s) that could generate a knowledge base to solve different tasks and avoid repetition along tasks.
+    
+    The solutions impelemnted for these tasks are highly dependent on numpy.* functions/properties. The most useful numpy feature
+    (python feature as well) is slicing. Because most of the tasks requires get|delete|replace|transform specific parts
+    of the array. other important features to solve the tasks easier are: np.all and np.where to find specific patterns
+    on the arrays wothou explicitly iterate along the given axis using for loops.
+    
+    No Machine Learning aproach was used to solve the tasks because those algorithms are not suitable for this. To become 
+    a ML problem we would need a bigger sample of traning/testing grids for each tasks and create a dataset suitable for
+    Machine Learning algorithms with the necesary data per observation(grid) that can lead the algorithm to find a solution.
+    
+    
+    """
         
     
 
